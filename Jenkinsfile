@@ -40,7 +40,7 @@ pipeline{
 
 						steps {
 
-							sh 'docker build -t sriramaleti9238/g1-allergy-service:latest .'
+							sh 'docker build -t sriramaleti9238/allergy-service:latest .'
 
 							}
 
@@ -60,7 +60,7 @@ pipeline{
 
 					steps {
 
-						sh 'docker push sriramaleti9238/g1-allergy-service'
+						sh 'docker push sriramaleti9238/allergy-service'
 
 						}
 	
