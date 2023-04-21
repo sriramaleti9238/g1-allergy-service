@@ -17,10 +17,15 @@
 	<properties>
 		<java.version>17</java.version>
 		<spring-cloud.version>2022.0.1</spring-cloud.version>
+		<sonar.exclusions>com/revature/repository/*.*</sonar.exclusions>
+		<sonar.exclusions>com/revature/service/*.*</sonar.exclusions>
+		<sonar.exclusions>com/revature/entity/*.*</sonar.exclusions>
+		<sonar.exclusions>com/revature/entity/dto/*.*</sonar.exclusions>
+			
 	</properties>
 	<dependencies>
 		
-		<dependency>
+		<!--<dependency>
 			<groupId>org.springframework.cloud</groupId>
 			<artifactId>spring-cloud-starter-consul-config</artifactId>
 		</dependency>
@@ -28,9 +33,9 @@
 		<dependency>
 			<groupId>org.springframework.cloud</groupId>
 			<artifactId>spring-cloud-starter-consul-discovery</artifactId>
-		</dependency>
+		</dependency>-->
 		
-		<dependency>
+		<!--<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-configuration-processor</artifactId>
 			<optional>true</optional>
@@ -38,7 +43,7 @@
 		<dependency>
 			<groupId>org.springframework.cloud</groupId>
 			<artifactId>spring-cloud-starter-config</artifactId>
-		</dependency>
+		</dependency>-->
 		
 		<dependency>
 			<groupId>com.mashape.unirest</groupId>
@@ -183,7 +188,15 @@
 						</configuration>
 					</execution>
 				</executions>
+				
 			</plugin>
+			
+			 <plugin>
+                <groupId>org.sonarsource.scanner.maven</groupId>
+                <artifactId>sonar-maven-plugin</artifactId>
+                <version>3.4.0.905</version>
+            </plugin>
+
 		</plugins>
 	</build>
 </project>

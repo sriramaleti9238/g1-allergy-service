@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.revature.dto.AllergyDto;
+import com.revature.exceptions.ResourceNotFoundException;
 import com.revature.service.AllergyService;
 
 import io.micrometer.core.annotation.Timed;
@@ -43,11 +44,12 @@ public class AllergyController {
 	public ResponseEntity<List<AllergyDto>> getAllAllergies() {
 		List<AllergyDto> allergies = null;
 		allergies = allergyService.allAllergies();
-		registry.counter("greetings.counter").increment();
+		
 		if (allergies == null || allergies.isEmpty())
 			return new ResponseEntity<>(HttpStatus.NO_CONTENT);
 		else
 //		log.info("AllergyController getAll() response{}",allergies);
+			registry.counter("greetings.counter").increment();
 			return new ResponseEntity<>(allergies, HttpStatus.OK);
 	}
 
@@ -55,11 +57,12 @@ public class AllergyController {
 	@Timed(value="greetingById.time",description="Time taken to retrieve allergy by Id")
 	public ResponseEntity<AllergyDto> getAllergyUsingId(@PathVariable int id) {
 		AllergyDto allergy = allergyService .getAllergyById(id);
-		registry.counter("greetings.counter").increment();
+		
 		if (allergy == null)
-			return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+			throw new ResourceNotFoundException("Patient not found for id " + id);
 		else
 //		log.info("AllergyController getAllergy() response{}",allergy);
+			registry.counter("greetings.counter").increment();
 			return new ResponseEntity<>(allergy, HttpStatus.OK);
 	}
 }
